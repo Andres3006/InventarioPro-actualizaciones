@@ -1,0 +1,140 @@
+/* Página de Inventario Pro: sin bibliotecas ni fuentes externas (carga rápido y sin rastreo). */
+:root {
+  --fondo: #f4f6fb;
+  --superficie: #ffffff;
+  --texto: #142033;
+  --suave: #55617a;
+  --borde: #dfe4ee;
+  --primario: #1d4ed8;
+  --primario-hover: #1e40af;
+  --primario-suave: #e3ebff;
+  --exito: #15803d;
+  --aviso: #b45309;
+  --aviso-suave: #fff4e0;
+  --oscuro: #0f2140;
+  --radio: 14px;
+  --sombra: 0 6px 24px rgba(20, 32, 51, 0.08);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fondo: #0d1626;
+    --superficie: #152238;
+    --texto: #e8eef8;
+    --suave: #a3b0c7;
+    --borde: #26365a;
+    --primario: #3b82f6;
+    --primario-hover: #60a5fa;
+    --primario-suave: #1b2f55;
+    --exito: #4ade80;
+    --aviso: #fbbf24;
+    --aviso-suave: #3a2a0c;
+    --oscuro: #0a1322;
+    --sombra: 0 6px 24px rgba(0, 0, 0, 0.35);
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--primario); }
+a:hover { color: var(--primario-hover); }
+.contenedor { width: min(1120px, 100% - 32px); margin-inline: auto; }
+
+/* Encabezado */
+.encabezado { background: var(--oscuro); color: #fff; position: sticky; top: 0; z-index: 10; }
+.encabezado .contenedor { display: flex; align-items: center; gap: 16px; min-height: 64px; flex-wrap: wrap; }
+.marca { display: flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; font-weight: 700; font-size: 20px; }
+.marca img { width: 36px; height: 36px; }
+.menu { display: flex; gap: 18px; margin-left: auto; flex-wrap: wrap; }
+.menu a { color: #cdd8ee; text-decoration: none; font-size: 15px; }
+.menu a:hover { color: #fff; }
+
+/* Portada */
+.portada { padding: 64px 0 40px; }
+.portada .contenedor { display: grid; grid-template-columns: 1.05fr 1fr; gap: 40px; align-items: center; }
+.portada h1 { font-size: clamp(32px, 5vw, 48px); line-height: 1.15; margin: 0 0 16px; }
+.portada p.resumen { font-size: 19px; color: var(--suave); margin: 0 0 28px; }
+.portada .captura { border-radius: var(--radio); box-shadow: var(--sombra); border: 1px solid var(--borde); }
+.boton {
+  display: inline-flex; align-items: center; gap: 10px; padding: 14px 26px; border-radius: 10px;
+  background: var(--primario); color: #fff; font-weight: 700; text-decoration: none; font-size: 18px;
+}
+.boton:hover { background: var(--primario-hover); color: #fff; }
+.boton.secundario { background: var(--primario-suave); color: var(--primario); }
+.boton.secundario:hover { color: var(--primario-hover); }
+.nota { font-size: 14px; color: var(--suave); margin-top: 10px; }
+
+/* Secciones */
+section { padding: 48px 0; }
+section h2 { font-size: clamp(26px, 3.5vw, 34px); margin: 0 0 8px; }
+section p.intro { color: var(--suave); margin: 0 0 28px; max-width: 760px; }
+.rejilla { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+.tarjeta {
+  background: var(--superficie); border: 1px solid var(--borde); border-radius: var(--radio); padding: 22px;
+  box-shadow: var(--sombra);
+}
+.tarjeta h3 { margin: 0 0 6px; font-size: 19px; }
+.tarjeta p { margin: 0; color: var(--suave); font-size: 16px; }
+.icono {
+  width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--primario-suave);
+  color: var(--primario); font-weight: 800; margin-bottom: 12px;
+}
+.galeria { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+.galeria figure { margin: 0; }
+.galeria img { border-radius: 10px; border: 1px solid var(--borde); box-shadow: var(--sombra); }
+.galeria figcaption { font-size: 15px; color: var(--suave); margin-top: 8px; }
+.pasos { counter-reset: paso; list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
+.pasos li {
+  counter-increment: paso; background: var(--superficie); border: 1px solid var(--borde); border-radius: var(--radio);
+  padding: 18px 20px 18px 70px; position: relative;
+}
+.pasos li::before {
+  content: counter(paso); position: absolute; left: 18px; top: 16px; width: 36px; height: 36px; border-radius: 50%;
+  background: var(--primario); color: #fff; display: grid; place-items: center; font-weight: 800;
+}
+.aviso { background: var(--aviso-suave); border-left: 4px solid var(--aviso); padding: 14px 18px; border-radius: 8px; }
+.tabla { width: 100%; border-collapse: collapse; background: var(--superficie); border-radius: var(--radio); overflow: hidden; }
+.tabla th, .tabla td { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--borde); vertical-align: top; }
+.tabla th { width: 34%; color: var(--suave); font-weight: 600; }
+.contacto { display: flex; gap: 14px; flex-wrap: wrap; }
+.pie { background: var(--oscuro); color: #cdd8ee; padding: 32px 0; font-size: 15px; }
+.pie a { color: #fff; }
+
+/* Manual */
+.manual { display: grid; grid-template-columns: 260px 1fr; gap: 32px; padding: 32px 0 64px; }
+.indice { position: sticky; top: 84px; align-self: start; max-height: calc(100vh - 100px); overflow: auto; font-size: 15px; }
+.indice ol { padding-left: 20px; margin: 0; }
+.indice a { text-decoration: none; }
+.contenido h2 { border-top: 1px solid var(--borde); padding-top: 28px; margin-top: 36px; }
+.contenido h2:first-of-type { border-top: 0; margin-top: 0; padding-top: 0; }
+.contenido h3 { margin-top: 24px; }
+.contenido figure { margin: 18px 0; }
+.contenido figure img { border-radius: 10px; border: 1px solid var(--borde); box-shadow: var(--sombra); }
+.contenido figcaption { font-size: 14px; color: var(--suave); margin-top: 6px; }
+.contenido kbd {
+  background: var(--superficie); border: 1px solid var(--borde); border-bottom-width: 2px; border-radius: 5px;
+  padding: 1px 6px; font-size: 14px;
+}
+
+@media (max-width: 860px) {
+  .portada .contenedor { grid-template-columns: 1fr; }
+  .manual { grid-template-columns: 1fr; }
+  .indice { position: static; max-height: none; }
+  .menu { margin-left: 0; }
+}
+@media print {
+  .encabezado, .pie, .indice, .no-imprimir { display: none !important; }
+  body { background: #fff; color: #000; font-size: 11pt; }
+  .manual { display: block; padding: 0; }
+  .contenido h2 { break-before: page; border: 0; }
+  .contenido h2:first-of-type { break-before: auto; }
+  figure, .tabla, .aviso { break-inside: avoid; }
+  a { color: #000; text-decoration: none; }
+}

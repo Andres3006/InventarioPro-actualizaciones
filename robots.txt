@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://andres3006.github.io/InventarioPro-actualizaciones/sitemap.xml
